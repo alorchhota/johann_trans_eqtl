@@ -239,6 +239,10 @@ trans_assoc_per_chr = lapply(geno_chromosomes, function(chr){
     }
   })
   chr_crossmaps_df = do.call(rbind, chr_crossmaps)
+  if(is.null(chr_crossmaps_df)){
+    chr_crossmaps_df = data.frame(snps = 'dummy', gene = 'dummy', crossmap = NA, stringsAsFactors = F)
+    chr_crossmaps_df = chr_crossmaps_df[-1,,drop=F]
+  }
   
   ### compute total number of test and total number of cross-mappable tests
   total_snp_gene_pairs = nrow(geno_df) * nrow(chr_expr_df)
